@@ -9,6 +9,7 @@ export default function CardUpload() {
     cardFile: null,
     categories: [],
     message: "",
+    consent: false, // ✅ 초기값 추가
   });
 
   const categories = ["소형 평판UV", "대형 평판UV", "UV DTF", "기타"];
@@ -79,7 +80,7 @@ export default function CardUpload() {
           card_image_path: cardPath, // ✅ 필드명 맞춤
           categories: form.categories,
           message: form.message,
-          consent: true,
+          consent: form.consent, // ✅ 체크박스 값 반영
         },
       ]);
 
@@ -179,6 +180,20 @@ export default function CardUpload() {
             className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
             placeholder="문의하실 내용을 입력해주세요."
           />
+        </div>
+
+        {/* 개인정보 동의 */}
+        <div className="mb-6 flex items-center">
+          <input
+            type="checkbox"
+            checked={form.consent}
+            onChange={(e) => setForm({ ...form, consent: e.target.checked })}
+            required
+            className="h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300 rounded"
+          />
+          <span className="ml-2 text-sm text-gray-600">
+            개인정보 수집·이용에 동의합니다.
+          </span>
         </div>
 
         {/* 제출 버튼 */}
